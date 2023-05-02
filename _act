@@ -13,6 +13,8 @@ _act() {
 		'delete:Runs your workflow when someone deletes a Git reference (Git branch or tag) in the workflow s repository'
 		'deployment:Runs your workflow when someone creates a deployment in the workflow s repository'
 		'deployment_status:Runs your workflow when a third party provides a deployment status'
+		'discussion:Runs your workflow when a discussion in the workflow s repository is created or modified'
+		'discussion_comment:Runs your workflow when a comment on a discussion in the workflow s repository is created or modified'
 		'fork:Runs your workflow when someone forks a repository'
 		'gollum:Runs your workflow when someone creates or updates a Wiki page'
 		'issue_comment:Runs your workflow when an issue or pull request comment is created, edited, or deleted'
