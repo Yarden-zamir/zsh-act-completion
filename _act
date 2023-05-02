@@ -1,0 +1,92 @@
+#compdef act
+
+_act() {
+  local state curcontext="$curcontext" ret=1
+  typeset -A opt_args
+  local -a event_names
+  event_names=(
+# --- gen ---
+		'branch_protection_rule:Runs your workflow when branch protection rules in the workflow repository are changed'
+		'check_run:Runs your workflow when activity related to a check run occurs'
+		'check_suite:Runs your workflow when check suite activity occurs'
+		'create:Runs your workflow when someone creates a Git reference (Git branch or tag) in the workflow s repository'
+		'delete:Runs your workflow when someone deletes a Git reference (Git branch or tag) in the workflow s repository'
+		'deployment:Runs your workflow when someone creates a deployment in the workflow s repository'
+		'deployment_status:Runs your workflow when a third party provides a deployment status'
+		'discussion:Runs your workflow when a discussion in the workflow s repository is created or modified'
+		'discussion_comment:Runs your workflow when a comment on a discussion in the workflow s repository is created or modified'
+		'fork:Runs your workflow when someone forks a repository'
+		'gollum:Runs your workflow when someone creates or updates a Wiki page'
+		'issue_comment:Runs your workflow when an issue or pull request comment is created, edited, or deleted'
+		'issue_comment:The `issue_comment` event occurs for comments on both issues and pull requests'
+		'issues:Runs your workflow when an issue in the workflow s repository is created or modified'
+		'label:Runs your workflow when a label in your workflow s repository is created or modified'
+		'merge_group:Runs your workflow when a pull request is added to a merge queue, which adds the pull request to a merge group'
+		'milestone:Runs your workflow when a milestone in the workflow s repository is created or modified'
+		'page_build:Runs your workflow when someone pushes to a branch that is the publishing source for {% data variables'
+		'project:Runs your workflow when a project board is created or modified'
+		'project_card:Runs your workflow when a card on a project board is created or modified'
+		'project_column:Runs your workflow when a column on a project board is created or modified'
+		'public:Runs your workflow when your workflow s repository changes from private to public'
+		'pull_request:Conversely, workflows with the `pull_request_target` event will run even if the pull request has a merge conflict'
+		'pull_request_comment:To run your workflow when a comment on a pull request (not on a pull request s diff) is created, edited, or deleted, use the [`issue_comment`](#issue_comment) event'
+		'pull_request_review:Runs your workflow when a pull request review is submitted, edited, or dismissed'
+		'pull_request_review_comment:Runs your workflow when a pull request review comment is modified'
+		'pull_request_target:Runs your workflow when activity on a pull request in the workflow s repository occurs'
+		'push:Runs your workflow when you push a commit or tag'
+		'registry_package:Runs your workflow when activity related to {% data variables'
+		'release:Runs your workflow when release activity in your repository occurs'
+		'repository_dispatch:You can use the GitHub API to trigger a webhook event called [`repository_dispatch`](/webhooks-and-events/webhooks/webhook-events-and-payloads#repository_dispatch) when you want to trigger a workflow for activity that happens outside of GitHub'
+		'schedule:The `schedule` event allows you to trigger a workflow at a scheduled time'
+		'status:Runs your workflow when the status of a Git commit changes'
+		'watch:Runs your workflow when the workflow s repository is starred'
+		'workflow_call:`workflow_call` is used to indicate that a workflow can be called by another workflow'
+		'workflow_dispatch:To enable a workflow to be triggered manually, you need to configure the `workflow_dispatch` event'
+		'workflow_run:This event occurs when a workflow run is requested or completed'
+# --- gen ---
+  )
+  _arguments -s -S -C \
+    '(-h --help)'{-h,--help}'[Display help for act]' \
+    '(-v --verbose)'{-v,--verbose}'[Enable verbose output]' \
+    '(-C --directory)'{-C,--directory}'[Specify working directory]:_directories' \
+    '(-j --job)'{-j,--job}'[Run a specific job ID]:_values -s , job_ID' \
+    '(-w --watch)'{-w,--watch}'[Watch the local repo and run when files change]' \
+    '(-W --workflows)'{-W,--workflows}'[Specify path to workflow file(s)]:_files' \
+    '(-e --eventpath)'{-e,--eventpath}'[Specify path to event JSON file]:_files' \
+    '(-l --list)'{-l,--list}'[List workflows]' \
+    '(-g --graph)'{-g,--graph}'[Draw workflows]' \
+    '(-n --dryrun)'{-n,--dryrun}'[Enable dryrun mode]' \
+    '(-b --bind)'{-b,--bind}'[Bind working directory to container, rather than copy]' \
+    '(-q --quiet)'{-q,--quiet}'[Disable logging of output from steps]' \
+    '(-p --pull)'{-p,--pull}'[Pull docker image(s) even if already present]' \
+    '(-r --reuse)'{-r,--reuse}'[Don'\''t remove container(s) on successfully completed workflow(s) to maintain state between runs]' \
+    '(-s --secret)'{-s,--secret}'[Secret to make available to actions with optional value]:_values -s , secret' \
+    '(-a --actor)'{-a,--actor}'[User that triggered the event]:_values -s , actor' \
+    '(-P --platform)'{-P,--platform}'[Custom image to use per platform]:_values -s , platform' \
+    '*:event name:->event_names' && ret=0 # th
+    # '*:: :->args' && ret=0
+  case $state in
+    (event_names)
+      if (( CURRENT == 2 )); then
+        _describe -t event_names "event name" event_names && ret=0
+      fi
+      ;;
+  esac
+
+
+
+  # case $state in
+  #   (args)
+  #     if (( CURRENT == 1 )); then
+  #       _describe -t event_names "event name" event_names && ret=0
+  #     else
+  #       _describe -t commands "act command" commands
+  #       ret=0
+  #     fi
+  #     ;;
+  # esac
+
+  # return ret
+}
+
+_act
