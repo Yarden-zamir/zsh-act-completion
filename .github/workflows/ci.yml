@@ -37,7 +37,9 @@ jobs:
       run: |
         brew tap ${{ github.event.repository.owner.login }}/tap
         curl --version
-        brew reinstall curl
+        brew reinstall curl --with-openssl --with-nghttp2
+        brew link curl --force
+        curl -V
         export HOMEBREW_FORCE_BREWED_CURL=true
         sha=$(curl -L ${{ github.event.repository.html_url }}/archive/${{ steps.tag_version.outputs.new_tag }}.tar.gz | shasum -a 256 | cut -d ' ' -f 1)
         brew bump-formula-pr \
