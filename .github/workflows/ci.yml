@@ -1,5 +1,10 @@
 name: CI - tag and release
 on:
+  workflow_run:
+    workflows: ["rebuild_events"]
+    branches: [main]
+    types:
+      - completed
   workflow_dispatch:
   push:
     branches:
