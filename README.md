@@ -1,3 +1,4 @@
+[small "blog" on making this](https://www.yarden-zamir.com/docs/shell-completions-for-act/)
 # act-zsh-completion
 Completion for act (github actions local runner) using generation directly from docs
 ![Screen Shot 2023-05-02 at 19 49 58](https://user-images.githubusercontent.com/8178413/235732235-6c44b48d-cfbc-4ad4-ba98-2b572296c0c8.png)
