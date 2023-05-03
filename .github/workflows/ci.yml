@@ -37,7 +37,7 @@ jobs:
       run: |
         brew tap ${{ github.event.repository.owner.login }}/tap
         curl --version
-        brew reinstall curl --with-openssl --with-nghttp2
+        brew reinstall curl
         brew link curl --force
         curl -V
         export HOMEBREW_FORCE_BREWED_CURL=true
