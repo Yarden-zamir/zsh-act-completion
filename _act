@@ -62,30 +62,14 @@ _act() {
     '(-s --secret)'{-s,--secret}'[Secret to make available to actions with optional value]:_values -s , secret' \
     '(-a --actor)'{-a,--actor}'[User that triggered the event]:_values -s , actor' \
     '(-P --platform)'{-P,--platform}'[Custom image to use per platform]:_values -s , platform' \
-    '*:event name:->event_names' && ret=0 # th
-    # '*:: :->args' && ret=0
+    '*:event name:->event_names' && ret=0
   case $state in
     (event_names)
       if (( CURRENT == 2 )); then
-        _describe -t event_names "event name" event_names && ret=0
+        _describe -t event_names "event name" event_names
       fi
       ;;
   esac
-
-
-
-  # case $state in
-  #   (args)
-  #     if (( CURRENT == 1 )); then
-  #       _describe -t event_names "event name" event_names && ret=0
-  #     else
-  #       _describe -t commands "act command" commands
-  #       ret=0
-  #     fi
-  #     ;;
-  # esac
-
-  # return ret
 }
 
 _act
