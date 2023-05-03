@@ -36,19 +36,13 @@ jobs:
     - name: Release my project to homebrew
       run: |
         brew tap ${{ github.event.repository.owner.login }}/tap
-        curl --version
-        brew reinstall curl
-        brew link curl --force
-        echo 'export PATH="/usr/local/opt/curl/bin:$PATH"' >> /Users/runner/.bash_profile
-        curl -V
-        export HOMEBREW_FORCE_BREWED_CURL=true
         sha=$(curl -L https://github.com/Yarden-zamir/zsh-act-completion/archive/v0.0.12.tar.gz | shasum -a 256 | cut -d ' ' -f 1)
         echo $sha
         brew bump-formula-pr \
           --force \
-          --url=https://github.com/Yarden-zamir/zsh-act-completion/archive/v0.0.12.tar.gz \
+          --url="https://github.com/Yarden-zamir/zsh-act-completion/archive/v0.0.12.tar.gz" \
           --sha256=$sha \
           --message="Update zsh-act-completion to v0.0.12.    /auto-merge" \
-          zsh-act-completion
+          "zsh-act-completion"
       env:
         HOMEBREW_GITHUB_API_TOKEN: ${{ secrets.TOKEN }}
