@@ -36,6 +36,9 @@ jobs:
     - name: Release my project to homebrew
       run: |
         brew tap ${{ github.event.repository.owner.login }}/tap
+        curl --version
+        brew install curl
+        export HOMEBREW_FORCE_BREWED_CURL=true
         brew bump-formula-pr \
           --force \
           --url=${{ github.event.repository.html_url }}/archive/${{ steps.tag_version.outputs.new_tag }}.tar.gz \
