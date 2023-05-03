@@ -42,13 +42,13 @@ jobs:
         echo 'export PATH="/usr/local/opt/curl/bin:$PATH"' >> /Users/runner/.bash_profile
         curl -V
         export HOMEBREW_FORCE_BREWED_CURL=true
-        sha=$(curl -L ${{ github.event.repository.html_url }}/archive/${{ steps.tag_version.outputs.new_tag }}.tar.gz | shasum -a 256 | cut -d ' ' -f 1)
+        sha=$(curl -L https://github.com/Yarden-zamir/zsh-act-completion/archive/v0.0.12.tar.gz | shasum -a 256 | cut -d ' ' -f 1)
         echo $sha
         brew bump-formula-pr \
           --force \
-          --url=${{ github.event.repository.html_url }}/archive/${{ steps.tag_version.outputs.new_tag }}.tar.gz \
+          --url=https://github.com/Yarden-zamir/zsh-act-completion/archive/v0.0.12.tar.gz \
           --sha256=$sha \
-          --message="Update ${{ github.event.repository.name }} to ${{ steps.tag_version.outputs.new_tag }}.    /auto-merge" \
-          ${{ github.event.repository.name }}
+          --message="Update zsh-act-completion to v0.0.12.    /auto-merge" \
+          zsh-act-completion
       env:
         HOMEBREW_GITHUB_API_TOKEN: ${{ secrets.TOKEN }}
