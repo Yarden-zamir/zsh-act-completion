@@ -10,6 +10,7 @@ on:
   schedule:
     - cron: '0 0 * * *'
 
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -21,7 +22,7 @@ jobs:
       - run: pip install -r requirements.txt
       - run: python rebuild_events.py
         env:
-          SOURCE: ${{ inputs.SOURCE }}
+          SOURCE: ${{ inputs.SOURCE || 'https://raw.githubusercontent.com/github/docs/main/content/actions/using-workflows/events-that-trigger-workflows.md'}}
       - uses: EndBug/add-and-commit@v9
         with:
           add: _act
