@@ -1,0 +1,46 @@
+name: CI - tag and release
+on:
+  push:
+    branches:
+    - main
+    paths-ignore:
+      - 'README.md'
+      - '.github/ISSUE_TEMPLATE/**'
+      - '.github/PULL_REQUEST_TEMPLATE/**'
+      - '.github/dependabot.yml'
+      - '.github/FUNDING.yml'
+      - '.github/SECURITY.md'
+      - 'LICENSE.md'
+
+jobs:
+  update:
+    runs-on: macos-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Bump version and push tag
+      id: tag_version
+      uses: mathieudutour/github-tag-action@v6.1
+      with:
+        github_token: ${{ secrets.TOKEN }}
+
+    - name: Create a GitHub release
+      uses: ncipollo/release-action@v1
+      with:
+        tag: ${{ steps.tag_version.outputs.new_tag }}
+        name: Release ${{ steps.tag_version.outputs.new_tag }}
+        body: ${{ steps.tag_version.outputs.changelog }}
+        token: ${{ secrets.TOKEN }}
+
+    - name: Release my project to homebrew
+      run: |
+        brew tap ${{ github.event.repository.owner.login }}/tap
+        brew bump-formula-pr \
+          --force \
+          --url=${{ github.event.repository.html_url }}/archive/${{ steps.tag_version.outputs.new_tag }}.tar.gz \
+          --sha256=$(curl -L ${{ github.event.repository.html_url }}/archive/${{ steps.tag_version.outputs.new_tag }}.tar.gz | shasum -a 256 | cut -d ' ' -f 1) \
+          --message="Update ${{ github.event.repository.name }} to ${{ steps.tag_version.outputs.new_tag }}.    /auto-merge" \
+          ${{ github.event.repository.name }}
+      env:
+        HOMEBREW_GITHUB_API_TOKEN: ${{ secrets.TOKEN }}
