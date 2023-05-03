@@ -25,5 +25,5 @@ jobs:
           SOURCE: ${{ inputs.SOURCE || 'https://raw.githubusercontent.com/github/docs/main/content/actions/using-workflows/events-that-trigger-workflows.md'}}
       - uses: EndBug/add-and-commit@v9
         with:
-          add: _act
+          add: zsh/_act
           message: "Updated completion per changes in github/docs"
