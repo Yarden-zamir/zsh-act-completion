@@ -35,16 +35,12 @@ jobs:
 
     - name: Release my project to homebrew
       run: |
-        brew cleanup
-        brew update
         brew tap ${{ github.event.repository.owner.login }}/tap
-        sha=$(curl -L https://github.com/Yarden-zamir/zsh-act-completion/archive/v0.0.12.tar.gz | shasum -a 256 | cut -d ' ' -f 1)
-        echo $sha
-        # brew bump-formula-pr \
-        #   --force \
-        #   --url="https://github.com/Yarden-zamir/zsh-act-completion/archive/v0.0.12.tar.gz" \
-        #   --sha256=$sha \
-        #   --message="Update zsh-act-completion to v0.0.12.    /auto-merge" \
-        #   "zsh-act-completion"
+        brew bump-formula-pr \
+          --force \
+          --url=${{ github.event.repository.html_url }}/archive/${{ steps.tag_version.outputs.new_tag }}.tar.gz \
+          --sha256=$(curl -L ${{ github.event.repository.html_url }}/archive/${{ steps.tag_version.outputs.new_tag }}.tar.gz | shasum -a 256 | cut -d ' ' -f 1) \
+          --message="Update ${{ github.event.repository.name }} to ${{ steps.tag_version.outputs.new_tag }}.    /auto-merge" \
+          ${{ github.event.repository.name }}
       env:
         HOMEBREW_GITHUB_API_TOKEN: ${{ secrets.TOKEN }}
