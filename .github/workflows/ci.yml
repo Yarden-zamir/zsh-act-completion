@@ -1,10 +1,5 @@
 name: CI - tag and release
 on:
-  workflow_run:
-    workflows: ["Rebuild events section from github docs"]
-    branches: [main]
-    types:
-      - completed
   workflow_dispatch:
   push:
     branches:
