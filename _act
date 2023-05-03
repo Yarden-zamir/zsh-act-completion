@@ -1,7 +1,7 @@
 #compdef act
 
 _act() {
-  local state curcontext="$curcontext" ret=1
+  local state curcontext="$curcontext"
   typeset -A opt_args
   local -a event_names
   event_names=(
@@ -62,7 +62,7 @@ _act() {
     '(-s --secret)'{-s,--secret}'[Secret to make available to actions with optional value]:_values -s , secret' \
     '(-a --actor)'{-a,--actor}'[User that triggered the event]:_values -s , actor' \
     '(-P --platform)'{-P,--platform}'[Custom image to use per platform]:_values -s , platform' \
-    '*:event name:->event_names' && ret=0
+    '*:event name:->event_names'
   case $state in
     (event_names)
       if (( CURRENT == 2 )); then
