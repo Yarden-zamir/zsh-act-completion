@@ -29,6 +29,6 @@ jobs:
           add: zsh/_act
           message: "Updated completion per changes in github/docs"
       - run: gh workflow run "CI - tag and release"
-        if: ${{ steps.commit.outputs.committed == "true" }}
+        if: ${{ steps.commit.outputs.committed == 'true' }}
         env:
           GH_TOKEN: ${{ github.token }}
