@@ -34,7 +34,7 @@ _act() {
 		'pull_request_review_comment:Runs your workflow when a pull request review comment is modified'
 		'pull_request_target:Runs your workflow when activity on a pull request in the workflow s repository occurs'
 		'push:Runs your workflow when you push a commit or tag'
-		'registry_package:Runs your workflow when activity related to {% data variables'
+		'registry_package:```yaml'
 		'release:Runs your workflow when release activity in your repository occurs'
 		'repository_dispatch:You can use the GitHub API to trigger a webhook event called [`repository_dispatch`](/webhooks-and-events/webhooks/webhook-events-and-payloads#repository_dispatch) when you want to trigger a workflow for activity that happens outside of GitHub'
 		'schedule:The `schedule` event allows you to trigger a workflow at a scheduled time'
