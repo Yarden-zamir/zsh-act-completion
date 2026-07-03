@@ -7,6 +7,9 @@ Completion for act (github actions local runner) using generation directly from 
 # install
 ## brew 
 https://brew.sh/
+
+Homebrew tap: https://github.com/Yarden-zamir/homebrew-tap
+
 Run
 ```zsh
 brew tap yarden-zamir/tap
